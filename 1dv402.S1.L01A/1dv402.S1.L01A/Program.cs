@@ -84,13 +84,13 @@ namespace _1dv402.S1.L01A
             // Kvitto
 
             Console.WriteLine("\nKVITTO");
-            Console.WriteLine("--------------------------");
-            Console.WriteLine("Totalt\t\t: {0:c2}", subtotal);
-            Console.WriteLine("Öresavrundning\t: {0:c2}", roundingOffAmount);
-            Console.WriteLine("Att betala\t: {0:c0}", total);
-            Console.WriteLine("Kontant\t\t: {0:c0}", amountReceived);
-            Console.WriteLine("Tillbaka\t: {0:c0}", change);
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Totalt\t\t: {0,12:c2}", subtotal);
+            Console.WriteLine("Öresavrundning\t: {0,12:c2}", roundingOffAmount);
+            Console.WriteLine("Att betala\t: {0,12:c0}", total);
+            Console.WriteLine("Kontant\t\t: {0,12:c0}", amountReceived);
+            Console.WriteLine("Tillbaka\t: {0,12:c0}", change);
+            Console.WriteLine("------------------------------");
 
             // Lämna åter av respektive valuta
 

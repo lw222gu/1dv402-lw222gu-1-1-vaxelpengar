@@ -16,7 +16,7 @@ namespace _1dv402.S1.L01A
             double roundingOffAmount = 0;
             int change = 0;
 
-            // Ange totalsumma (om den är <= 0,49 ska det felhanteras)
+            // Ange totalsumma (om den är <= 0,49, eller annat än heltal eller flyttal matas in ska det felhanteras)
 
             while (true)
             {
@@ -24,18 +24,28 @@ namespace _1dv402.S1.L01A
                 {
                     Console.Write("Ange totalsumma\t\t: ");
                     subtotal = double.Parse(Console.ReadLine());
+
                     if (subtotal < 0.5)
                     {
-                        throw new SystemException();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Beloppet är för litet. Programmet avslutas.");
+                        Console.ResetColor();
+                        return;
                     }
                     break;
                 }
 
                 catch (FormatException)
                 {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Du måste ange totalsumman i siffror");
+                    Console.ResetColor();
                 }
-            } 
+
+
+            }
 
             // Ange erhållet belopp
 
@@ -47,14 +57,21 @@ namespace _1dv402.S1.L01A
                     amountReceived = int.Parse(Console.ReadLine());
                     if (amountReceived < subtotal)
                     {
-                        throw new SystemException();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Beloppet är mindre än totalsumman. Programmet avslutas.");
+                        Console.ResetColor();
+                        return;
                     }
                     break;
                 }
 
                 catch (FormatException)
                 {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Du måste ange ett heltal.");
+                    Console.ResetColor();
                 }
             }
 
@@ -86,12 +103,18 @@ namespace _1dv402.S1.L01A
             int oneCrowns = 0;
 
             fivehundreds = change / 500;
-            onehundreds = (change - fivehundreds * 500) % 500 / 100;
-            fiftyKronors = (change - fivehundreds * 500 - onehundreds * 100) % 100 / 50;
-            twentyKronors = (change - fivehundreds * 500 - onehundreds * 100 - fiftyKronors * 50) % 50 / 20;
-            tenCrowns = (change - fivehundreds * 500 - onehundreds * 100 - fiftyKronors * 50 - twentyKronors * 20) % 20 / 10;
-            fiveCrowns = (change - fivehundreds * 500 - onehundreds * 100 - fiftyKronors * 50 - twentyKronors * 20 - tenCrowns * 10) % 10 / 5;
-            oneCrowns = (change - fivehundreds * 500 - onehundreds * 100 - fiftyKronors * 50 - twentyKronors * 20 - tenCrowns * 10 - fiveCrowns * 5) % 5;
+            change = change % 500;
+            onehundreds = change / 100;
+            change = change % 100;
+            fiftyKronors = change / 50;
+            change = change % 50;
+            twentyKronors = change / 20;
+            change = change % 20;
+            tenCrowns = change / 10;
+            change = change % 10;
+            fiveCrowns = change / 5;
+            change = change % 5;
+            oneCrowns = change / 1;
 
             if (fivehundreds >= 1)
             {
